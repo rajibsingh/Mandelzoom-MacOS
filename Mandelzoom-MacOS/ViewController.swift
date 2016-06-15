@@ -10,13 +10,13 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    @IBOutlet weak var imageCell: NSImageCell!
+    @IBOutlet weak var imageView: NSImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print(imageCell.description)
+        print(imageView.description)
     }
 
     override var representedObject: AnyObject? {

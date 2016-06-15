@@ -673,14 +673,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfj-JZ-hdL">
+                                <rect key="frame" x="0.0" y="222" width="48" height="48"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="6uz-pZ-87U"/>
+                            </imageView>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ki-jK-wfa">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <rect key="frame" x="-6" y="0.0" width="480" height="270"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="aEI-N0-Wpe"/>
                             </imageView>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="imageCell" destination="aEI-N0-Wpe" id="ZrX-9H-rjk"/>
+                        <outlet property="imageView" destination="1Ki-jK-wfa" id="Klv-FC-EWE"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
