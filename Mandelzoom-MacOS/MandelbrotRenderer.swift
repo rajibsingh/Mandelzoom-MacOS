@@ -14,7 +14,7 @@ class MandelbrotRenderer {
     private let topLeft: ComplexNumber
     private let bottomRight: ComplexNumber
     private let threshold = 10
-    private let iterations = 300
+    private let iterations = 100
     private let offset: ComplexNumber
 
 
