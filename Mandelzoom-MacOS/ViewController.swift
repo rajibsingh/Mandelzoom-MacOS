@@ -14,11 +14,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // try to load up an image and display it
-        let demoImage: NSImage = NSImage(imageLiteral: "eagle-strike.jpg")
-        imageView.image = demoImage
 
-        // now try to display a rendered bitmap
+        // try to display a rendered bitmap
         let frameSize: CGSize = imageView.frame.size
         let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
         let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
