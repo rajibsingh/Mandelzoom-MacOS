@@ -15,8 +15,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // try to load up an image and display it
-        let image: NSImage = NSImage(imageLiteral: "eagle-strike.jpg")
-        imageView.image = image
+        let demoImage: NSImage = NSImage(imageLiteral: "eagle-strike.jpg")
+        imageView.image = demoImage
 
         // now try to display a rendered bitmap
         let frameSize: CGSize = imageView.frame.size
@@ -24,7 +24,8 @@ class ViewController: NSViewController {
         let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
         let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
         let cgim: CGImage = renderer.getImage()
-//        imageView.image = NSImage(CGImage: renderedImage)
+        let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
+        imageView.image = nsImage
     }
 
     override var representedObject: AnyObject? {
