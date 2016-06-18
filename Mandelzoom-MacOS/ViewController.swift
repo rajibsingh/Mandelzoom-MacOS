@@ -14,12 +14,17 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        print(imageView.description)
         // try to load up an image and display it
         let image: NSImage = NSImage(imageLiteral: "eagle-strike.jpg")
         imageView.image = image
+
+        // now try to display a rendered bitmap
+        let frameSize: CGSize = imageView.frame.size
+        let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
+        let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
+        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
+        let cgim: CGImage = renderer.getImage()
+//        imageView.image = NSImage(CGImage: renderedImage)
     }
 
     override var representedObject: AnyObject? {
