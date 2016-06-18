@@ -10,7 +10,10 @@ import XCTest
 @testable import Mandelzoom_MacOS
 
 class Mandelzoom_MacOSTests: XCTestCase {
-    
+
+    private var tl: ComplexNumber = ComplexNumber(x: -1.0, y: 0.75)
+    private var br: ComplexNumber = ComplexNumber(x: 0.5, y: -1)
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -29,7 +32,10 @@ class Mandelzoom_MacOSTests: XCTestCase {
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {
-            // Put the code you want to measure the time of here.
+            // Put the codenow  you want to measure the time of here.
+            let cgsize: CGSize = CGSize(width: 1000, height: 1000)
+            let renderer: MandelbrotRenderer = MandelbrotRenderer(size: cgsize, topLeft: self.tl, bottomRight: self.br)
+            let image = renderer.getImage()
         }
     }
     
