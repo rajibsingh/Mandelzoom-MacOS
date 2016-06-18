@@ -2,7 +2,7 @@
 Mandelzoom
 ==========
 
-![Current Rendering](http://i.imgur.com/26BFIIv.png)
+![Current Rendering](http://i.imgur.com/N8lMxfW.png)
 
 refer to the classic [article](https://www.scientificamerican.com/media/inline/blog/File/Dewdney_Mandelbrot.pdf) by AK Dewdney for the Mathematical Recreations column of the Scientific American. 
 
