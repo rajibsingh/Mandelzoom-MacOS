@@ -17,6 +17,9 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         print(imageView.description)
+        // try to load up an image and display it
+        let image: NSImage = NSImage(imageLiteral: "eagle-strike.jpg")
+        imageView.image = image
     }
 
     override var representedObject: AnyObject? {

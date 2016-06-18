@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B81B8C6587028BF77192865 /* eagle-strike.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B81BA10F842E998F3EEE647 /* eagle-strike.jpg */; };
 		35F582451D1114DC0005FAC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F582441D1114DC0005FAC9 /* AppDelegate.swift */; };
 		35F582471D1114DC0005FAC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F582461D1114DC0005FAC9 /* ViewController.swift */; };
 		35F582491D1114DC0005FAC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F582481D1114DC0005FAC9 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B81BA10F842E998F3EEE647 /* eagle-strike.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "eagle-strike.jpg"; sourceTree = "<group>"; };
 		35F582411D1114DC0005FAC9 /* Mandelzoom-MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mandelzoom-MacOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F582441D1114DC0005FAC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35F582461D1114DC0005FAC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				35F582481D1114DC0005FAC9 /* Assets.xcassets */,
 				35F5824A1D1114DC0005FAC9 /* Main.storyboard */,
 				35F5824D1D1114DC0005FAC9 /* Info.plist */,
+				1B81BA10F842E998F3EEE647 /* eagle-strike.jpg */,
 			);
 			path = "Mandelzoom-MacOS";
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			files = (
 				35F582491D1114DC0005FAC9 /* Assets.xcassets in Resources */,
 				35F5824C1D1114DC0005FAC9 /* Main.storyboard in Resources */,
+				1B81B8C6587028BF77192865 /* eagle-strike.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
