@@ -19,6 +19,7 @@ class MandelView: NSView {
         NSLog("mouseDown event registered")
         var location = event.locationInWindow
         var local_point = convertPoint(location, fromView: self)
+        startBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
     }
 
@@ -30,7 +31,11 @@ class MandelView: NSView {
         NSLog("mouseUp event registered")
         var location = event.locationInWindow
         var local_point = convertPoint(location, fromView: self)
+        endBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
+        NSLog("\tstartBox:\(startBox)")
+        NSLog("\tendBox:\(endBox)")
+
     }
 
     override func mouseMoved(theEvent: NSEvent) {
