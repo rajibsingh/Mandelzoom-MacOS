@@ -9,22 +9,26 @@ import Cocoa
 class MandelView: NSView {
 
     override func mouseUp(theEvent: NSEvent) {
-        print("mouseUp event registered")
+        NSLog("mouseUp event registered")
     }
 
     override func mouseDragged(theEvent: NSEvent) {
-        print("mouseDragged event registered")
+        NSLog("mouseDragged event registered")
     }
 
     override func mouseDown(theEvent: NSEvent) {
-        print("mouseDown event registered")
+        NSLog("mouseDown event registered")
     }
 
     override func mouseMoved(theEvent: NSEvent) {
-        print("mouseDown event registered")
+        NSLog("mouseDown event registered")
     }
 
     func acceptsFirstMouseEvent(theEvent: NSEvent) -> Bool {
         return true
     }
+
+//    override func acceptsFirstResponder() {
+//        return true
+//    }
 }
