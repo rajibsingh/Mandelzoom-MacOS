@@ -8,16 +8,29 @@ import Cocoa
 
 class MandelView: NSView {
 
-    override func mouseUp(theEvent: NSEvent) {
-        NSLog("mouseUp event registered")
+    private var startBox: NSPoint?
+    private var endBox: NSPoint?
+
+    required init!(coder aDecoder: NSCoder!) {
+        super.init(coder: aDecoder)
     }
 
-    override func mouseDragged(theEvent: NSEvent) {
-        NSLog("mouseDragged event registered")
-    }
-
-    override func mouseDown(theEvent: NSEvent) {
+    override func mouseDown(event: NSEvent) {
         NSLog("mouseDown event registered")
+        var location = event.locationInWindow
+        var local_point = convertPoint(location, fromView: self)
+        NSLog("\tlocation:\(local_point.x), \(local_point.y)")
+    }
+
+//    override func mouseDragged(theEvent: NSEvent) {
+//        NSLog("mouseDragged event registered")
+//    }
+
+    override func mouseUp(event: NSEvent) {
+        NSLog("mouseUp event registered")
+        var location = event.locationInWindow
+        var local_point = convertPoint(location, fromView: self)
+        NSLog("\tlocation:\(local_point.x), \(local_point.y)")
     }
 
     override func mouseMoved(theEvent: NSEvent) {
@@ -27,8 +40,4 @@ class MandelView: NSView {
     func acceptsFirstMouseEvent(theEvent: NSEvent) -> Bool {
         return true
     }
-
-//    override func acceptsFirstResponder() {
-//        return true
-//    }
 }
