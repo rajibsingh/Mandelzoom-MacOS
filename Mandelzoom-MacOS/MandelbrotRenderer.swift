@@ -74,8 +74,10 @@ class MandelbrotRenderer {
             } else if count > 4 {
                 pixels.append(whitepixel)
             } else {
-                let grayShade: UInt8 = UInt8((1.0 / Double(count)) * 255)
-                let pixel = PixelData(red: grayShade, green: grayShade, blue: grayShade)
+                let redcolor = UInt8(sin(Double(count) / 3.0));
+                let greencolor  = UInt8(cos(Double(count) / 6.0));
+                let bluecolor = UInt8(cos(Double(count) / 12.0 + 3.14 / 4.0));
+                let pixel = PixelData(red: redcolor, green: greencolor, blue: bluecolor)
                 pixels.append(pixel)
             }
         }
@@ -102,7 +104,7 @@ class MandelbrotRenderer {
         return cgim!
     }
 
-    func getCount(c: ComplexNumber) -> Int {
+    func getCount(c: ComplexNumber) -> Int{
         var count = 0
         var z = ComplexNumber(x: 0, y: 0)
         while (count < iterations && z.size() < 2) {
