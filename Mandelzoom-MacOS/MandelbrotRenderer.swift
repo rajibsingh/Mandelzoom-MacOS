@@ -13,8 +13,8 @@ class MandelbrotRenderer {
     private let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
     private let topLeft: ComplexNumber
     private let bottomRight: ComplexNumber
-    private let threshold = 10
-    private let iterations = 100
+    private let THRESHOLD = 10
+    private let MAXITERATIONS = 100
     private let offset: ComplexNumber
 
 
@@ -64,21 +64,25 @@ class MandelbrotRenderer {
 
         let whitepixel: PixelData = PixelData(red: 255, green: 255, blue: 255)
         let blackpixel: PixelData = PixelData(red: 0, green: 0, blue: 0)
+        let redpixel: PixelData = PixelData(red: 255, green: 0, blue: 0)
+        let greenpixel: PixelData = PixelData(red: 0, green: 255, blue: 0)
+        let bluepixel: PixelData = PixelData(red: 0, green: 0, blue: 255)
 
         let maxcolors = analyzeForColors(countArray)
         print("maxcolors: \(maxcolors)")
 
         for count in countArray {
-            if count == iterations {
+            // regardless of number of times it was run,
+            if count == MAXITERATIONS {
                 pixels.append(blackpixel)
-            } else if count > 4 {
+            } else if count <= 4 {
                 pixels.append(whitepixel)
+            } else if count <= 333 {
+                pixels.append(redpixel)
+            } else if count <= 666 {
+                pixels.append(greenpixel)
             } else {
-                let redcolor = UInt8(sin(Double(count) / 3.0));
-                let greencolor  = UInt8(cos(Double(count) / 6.0));
-                let bluecolor = UInt8(cos(Double(count) / 12.0 + 3.14 / 4.0));
-                let pixel = PixelData(red: redcolor, green: greencolor, blue: bluecolor)
-                pixels.append(pixel)
+                pixels.append(bluepixel)
             }
         }
 
@@ -107,13 +111,14 @@ class MandelbrotRenderer {
     func getCount(c: ComplexNumber) -> Int{
         var count = 0
         var z = ComplexNumber(x: 0, y: 0)
-        while (count < iterations && z.size() < 2) {
+        while (count < MAXITERATIONS && z.size() < 2) {
             count = count + 1
             z = z.squaredPlus(c)
         }
         return count
     }
 
+    // just does analysis for now. is not altering the generated bitmap.
     func analyzeForColors(input : [Int]) -> Int  {
         var counts = [Int : Int]()
         for count in input {
@@ -125,13 +130,15 @@ class MandelbrotRenderer {
         }
         print("sorting keys")
         let keys = counts.keys.sort()
-//        for key in keys {
-//                print("key: \(key) value: \(counts[key]!)")
-//        }
+        for key in keys {
+                print("key: \(key) value: \(counts[key]!)")
+        }
         return counts.count
     }
 
 }
+
+
 class ComplexNumber: CustomStringConvertible {
     var x: Double = 0
     var y: Double = 0
