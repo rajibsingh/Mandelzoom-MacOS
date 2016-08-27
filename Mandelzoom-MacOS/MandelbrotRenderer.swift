@@ -77,9 +77,9 @@ class MandelbrotRenderer {
                 pixels.append(blackpixel)
             } else if count <= 1 {
                 pixels.append(whitepixel)
-            } else if count <= 7 {
+            } else if count <= 3 {
                 pixels.append(redpixel)
-            } else if count <= 13 {
+            } else if count <= 7 {
                 pixels.append(greenpixel)
             } else {
                 pixels.append(bluepixel)
