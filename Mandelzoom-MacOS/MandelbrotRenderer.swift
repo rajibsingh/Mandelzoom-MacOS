@@ -75,11 +75,11 @@ class MandelbrotRenderer {
             // regardless of number of times it was run,
             if count == MAXITERATIONS {
                 pixels.append(blackpixel)
-            } else if count <= 4 {
+            } else if count <= 1 {
                 pixels.append(whitepixel)
-            } else if count <= 20 {
+            } else if count <= 7 {
                 pixels.append(redpixel)
-            } else if count <= 40 {
+            } else if count <= 13 {
                 pixels.append(greenpixel)
             } else {
                 pixels.append(bluepixel)
