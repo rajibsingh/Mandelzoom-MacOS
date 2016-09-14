@@ -71,15 +71,22 @@ class MandelbrotRenderer {
         let maxcolors = analyzeForColors(countArray)
         print("maxcolors: \(maxcolors)")
 
+        var redDelta = 255 / 3
+
         for count in countArray {
             // regardless of number of times it was run,
             if count == MAXITERATIONS {
                 pixels.append(blackpixel)
             } else if count <= 1 {
                 pixels.append(whitepixel)
-            } else if count <= 3 {
+            } else if count >= 2 {
+                pixels.append(PixelData(red: 255, green: 170, blue: 170))
+            } else if count == 3 {
+                pixels.append(PixelData(red: 255, green: 85, blue: 85))
+            } else if count >= 4 && count < 8 {
+
                 pixels.append(redpixel)
-            } else if count <= 7 {
+            } else if count <= 8 {
                 pixels.append(greenpixel)
             } else {
                 pixels.append(bluepixel)
