@@ -7,7 +7,6 @@ import Cocoa
 import Foundation
 
 class MandelbrotRenderer {
-
     let size: CGSize
     private let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
     private let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
@@ -16,7 +15,6 @@ class MandelbrotRenderer {
     private let THRESHOLD = 10
     private let MAXITERATIONS = 100
     private let offset: ComplexNumber
-
 
     struct PixelData {
         var a: UInt8 = 255
@@ -52,45 +50,59 @@ class MandelbrotRenderer {
                 let x = topLeft.x + (Double(stepX) * offset.x)
                 let y = topLeft.y + (Double(stepY) * offset.y)
                 let c: ComplexNumber = ComplexNumber(x: x, y: y)
-                var count = getCount(c)
+                let count = getCount(c)
                 countArray.append(count)
             }
         }
 
+        /*
         let tl = ComplexNumber(x: 0, y: 0)
         let tr = ComplexNumber(x: Double(size.width), y: 0)
         let bl = ComplexNumber(x: 0, y: Double(size.height))
         let br = ComplexNumber(x: Double(size.width), y: Double(size.width))
-
-        let whitepixel: PixelData = PixelData(red: 255, green: 255, blue: 255)
-        let blackpixel: PixelData = PixelData(red: 0, green: 0, blue: 0)
-        let redpixel: PixelData = PixelData(red: 255, green: 0, blue: 0)
-        let greenpixel: PixelData = PixelData(red: 0, green: 255, blue: 0)
-        let bluepixel: PixelData = PixelData(red: 0, green: 0, blue: 255)
-
+        */
+        
         let maxcolors = analyzeForColors(countArray)
         print("maxcolors: \(maxcolors)")
 
-        var redDelta = 255 / 3
+        var red:UInt8 = 255
+        var green:UInt8 = 255
+        var blue:UInt8 = 255
+        var colorDelta:UInt8 = 0
 
         for count in countArray {
-            // regardless of number of times it was run,
+            // black
+            var pixel:PixelData
             if count == MAXITERATIONS {
-                pixels.append(blackpixel)
-            } else if count <= 1 {
-                pixels.append(whitepixel)
-            } else if count >= 2 {
-                pixels.append(PixelData(red: 255, green: 170, blue: 170))
-            } else if count == 3 {
-                pixels.append(PixelData(red: 255, green: 85, blue: 85))
-            } else if count >= 4 && count < 8 {
-
-                pixels.append(redpixel)
-            } else if count <= 8 {
-                pixels.append(greenpixel)
-            } else {
-                pixels.append(bluepixel)
+                red = UInt8(0)
+                green = UInt8(0)
+                blue = UInt8(0)
             }
+            // white
+            else if count == 1 {
+                red = UInt8(255)
+                green = UInt8(255)
+                blue = UInt8(255)
+            }
+            // red
+            else if (count >= 3 && count < 7) {
+                colorDelta = UInt8(255 - (63 * (7 - count)))
+                green = UInt8(255 - colorDelta)
+                blue = UInt8(255 - colorDelta)
+                pixel = PixelData(red: red, green: green, blue: blue)
+            // green
+            } else if (count >= 7 && count < 9) {
+//                colorDelta = UInt8(255 - (63 * (count - 7)))
+                red = UInt8(0)
+                blue = UInt8(0)
+            // blue
+            } else if count >= 9 {
+                colorDelta = 85
+                red = UInt8(0)
+                green = UInt8(0)
+            }
+            pixel = PixelData(red: red, green: green, blue: blue)
+            pixels.append(pixel)
         }
 
         var data = pixels // Copy to mutable []
@@ -142,9 +154,7 @@ class MandelbrotRenderer {
         }
         return counts.count
     }
-
 }
-
 
 class ComplexNumber: CustomStringConvertible {
     var x: Double = 0
@@ -195,6 +205,4 @@ class ComplexNumber: CustomStringConvertible {
             return false
         }
     }
-
-
 }
