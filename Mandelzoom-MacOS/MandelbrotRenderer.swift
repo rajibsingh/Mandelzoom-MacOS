@@ -85,21 +85,20 @@ class MandelbrotRenderer {
                 blue = UInt8(255)
             }
             // red
-            else if (count >= 3 && count < 7) {
-                colorDelta = UInt8(255 - (63 * (7 - count)))
-                green = UInt8(255 - colorDelta)
-                blue = UInt8(255 - colorDelta)
-                pixel = PixelData(red: red, green: green, blue: blue)
+            else if (count > 1 && count < 7) {
+                colorDelta = UInt8(255 - (42 * (7 - count)))
+                green = UInt8(127 * (cos(Float(colorDelta)) + 1))
+                blue = UInt8(127 * (sin(Float(colorDelta)) + 1))
             // green
             } else if (count >= 7 && count < 9) {
-//                colorDelta = UInt8(255 - (63 * (count - 7)))
-                red = UInt8(0)
-                blue = UInt8(0)
+                colorDelta = UInt8(255 - (85 * (9 - count )))
+                red = UInt8(127 * (sin(Float(colorDelta)) + 1))
+                blue = UInt8(127 * (cos(Float(colorDelta)) + 1))
             // blue
-            } else if count >= 9 {
-                colorDelta = 85
-                red = UInt8(0)
-                green = UInt8(0)
+            } else if count <   MAXITERATIONS {
+                colorDelta = UInt8(255 - (2 * (MAXITERATIONS - count)))
+                red = UInt8(127 * (cos(Float(colorDelta)) + 1))
+                green = UInt8(127 * (sin(Float(colorDelta)) + 1))
             }
             pixel = PixelData(red: red, green: green, blue: blue)
             pixels.append(pixel)
