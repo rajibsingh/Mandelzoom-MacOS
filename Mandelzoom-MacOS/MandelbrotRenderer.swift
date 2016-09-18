@@ -55,13 +55,6 @@ class MandelbrotRenderer {
             }
         }
 
-        /*
-        let tl = ComplexNumber(x: 0, y: 0)
-        let tr = ComplexNumber(x: Double(size.width), y: 0)
-        let bl = ComplexNumber(x: 0, y: Double(size.height))
-        let br = ComplexNumber(x: Double(size.width), y: Double(size.width))
-        */
-        
         let maxcolors = analyzeForColors(countArray)
         print("maxcolors: \(maxcolors)")
 

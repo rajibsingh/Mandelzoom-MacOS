@@ -14,7 +14,7 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mandelView.doTheThing()
+        mandelView.initRender()
     }
 
     override var representedObject: AnyObject? {

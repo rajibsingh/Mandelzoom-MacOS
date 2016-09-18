@@ -36,7 +36,8 @@ class MandelView: NSView {
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
         NSLog("\tstartBox:\(startBox)")
         NSLog("\tendBox:\(endBox)")
-
+        NSLog("here we go ...")
+        self.renderView()
     }
 
     override func mouseMoved(theEvent: NSEvent) {
@@ -47,7 +48,17 @@ class MandelView: NSView {
         return true
     }
     
-    func doTheThing() {
+    func renderView() {
+        let frameSize: CGSize = imageView.frame.size
+        let tl2: ComplexNumber = ComplexNumber(x: -1.75, y: 1.2)
+        let br2: ComplexNumber = ComplexNumber(x: 0.3, y: -1.0)
+        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl2, bottomRight: br2)
+        let cgim: CGImage = renderer.getImage()
+        let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
+        imageView.image = nsImage
+    }
+    
+    func initRender() {
         let frameSize: CGSize = imageView.frame.size
         let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
         let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
