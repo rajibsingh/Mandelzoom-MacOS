@@ -89,16 +89,19 @@ class MandelbrotRenderer {
                 colorDelta = UInt8(255 - (42 * (7 - count)))
                 green = colorDelta
                 blue = colorDelta
+                red = 255
             // green
             } else if (count >= 7 && count < 9) {
                 colorDelta = UInt8(255 - (85 * (9 - count )))
                 red = colorDelta
                 blue = colorDelta
+                green = 255
             // blue
             } else if count <   MAXITERATIONS {
                 colorDelta = UInt8(255 - (2 * (MAXITERATIONS - count)))
                 red = colorDelta
                 green = colorDelta
+                blue = 255
             }
             pixel = PixelData(red: red, green: green, blue: blue)
             pixels.append(pixel)
