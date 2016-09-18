@@ -10,6 +10,7 @@ class MandelView: NSView {
 
     private var startBox: NSPoint?
     private var endBox: NSPoint?
+    @IBOutlet weak var imageView: NSImageView!
 
     required init!(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
@@ -44,5 +45,15 @@ class MandelView: NSView {
 
     func acceptsFirstMouseEvent(theEvent: NSEvent) -> Bool {
         return true
+    }
+    
+    func doTheThing() {
+        let frameSize: CGSize = imageView.frame.size
+        let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
+        let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
+        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
+        let cgim: CGImage = renderer.getImage()
+        let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
+        imageView.image = nsImage
     }
 }
