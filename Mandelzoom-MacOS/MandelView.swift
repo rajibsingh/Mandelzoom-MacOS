@@ -38,7 +38,7 @@ class MandelView: NSView {
         NSLog("\tstartBox:\(startBox)")
         NSLog("\tendBox:\(endBox)")
         NSLog("here we go ...")
-        let locationTuple = getLocationOnGraph(startBox!, brPixel: endBox!)
+        let locationTuple = getLocationOnGraph(startBox!, brPixel: endBox!, renderer: renderer!)
         let tl:ComplexNumber = locationTuple.topLeft
         let br:ComplexNumber = locationTuple.bottomRight
         renderer = MandelbrotRenderer(size: imageView.frame.size, topLeft: tl, bottomRight: br)
@@ -73,9 +73,11 @@ class MandelView: NSView {
         imageView.image = nsImage
     }
     
-    func getLocationOnGraph(tlPixel: NSPoint, brPixel: NSPoint) -> (topLeft: ComplexNumber, bottomRight: ComplexNumber) {
+    func getLocationOnGraph(tlPixel: NSPoint, brPixel: NSPoint, renderer: MandelbrotRenderer) -> (topLeft: ComplexNumber, bottomRight: ComplexNumber) {
         let topLeft = ComplexNumber(x: -1.0, y: 1.0)
         let bottomRight = ComplexNumber(x: 0.35, y:-1.0)
         return (topLeft, bottomRight)
     }
+    
+
 }

@@ -10,8 +10,8 @@ class MandelbrotRenderer {
     let size: CGSize
     private let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
     private let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
-    private let topLeft: ComplexNumber
-    private let bottomRight: ComplexNumber
+    internal let topLeft: ComplexNumber
+    internal let bottomRight: ComplexNumber
     private let THRESHOLD = 10
     private let MAXITERATIONS = 100
     private let offset: ComplexNumber
@@ -149,6 +149,8 @@ class MandelbrotRenderer {
         }
         return counts.count
     }
+    
+    
 }
 
 class ComplexNumber: CustomStringConvertible {
