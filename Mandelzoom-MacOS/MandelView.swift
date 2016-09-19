@@ -67,16 +67,23 @@ class MandelView: NSView {
         let frameSize: CGSize = imageView.frame.size
         let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
         let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
-        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
-        let cgim: CGImage = renderer.getImage()
+        renderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
+        let cgim: CGImage = renderer!.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
         imageView.image = nsImage
     }
     
     func getLocationOnGraph(tlPixel: NSPoint, brPixel: NSPoint, renderer: MandelbrotRenderer) -> (topLeft: ComplexNumber, bottomRight: ComplexNumber) {
-        let topLeft = ComplexNumber(x: -1.0, y: 1.0)
-        let bottomRight = ComplexNumber(x: 0.35, y:-1.0)
-        return (topLeft, bottomRight)
+//        let topLeft = ComplexNumber(x: -1.0, y: 1.0)
+//        let bottomRight = ComplexNumber(x: 0.35, y:-1.0)
+//        return (topLeft, bottomRight)
+        
+        self.size = size
+        self.topLeft = topLeft
+        self.bottomRight = bottomRight
+        let dX = (bottomRight.x - topLeft.x) / Double(size.width)
+        let dY = (bottomRight.y - topLeft.y) / Double(size.height)
+        offset = ComplexNumber(x: dX, y: dY)
     }
     
 
