@@ -11,15 +11,16 @@ class MandelView: NSView {
     private var startBox: NSPoint?
     private var endBox: NSPoint?
     @IBOutlet weak var imageView: NSImageView!
+    private var renderer: MandelbrotRenderer?
 
-    required init!(coder aDecoder: NSCoder!) {
+    required init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     override func mouseDown(event: NSEvent) {
         NSLog("mouseDown event registered")
-        var location = event.locationInWindow
-        var local_point = convertPoint(location, fromView: self)
+        let location = event.locationInWindow
+        let local_point = convertPoint(location, fromView: self)
         startBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
     }
@@ -30,14 +31,20 @@ class MandelView: NSView {
 
     override func mouseUp(event: NSEvent) {
         NSLog("mouseUp event registered")
-        var location = event.locationInWindow
-        var local_point = convertPoint(location, fromView: self)
+        let location = event.locationInWindow
+        let local_point = convertPoint(location, fromView: self)
         endBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
         NSLog("\tstartBox:\(startBox)")
         NSLog("\tendBox:\(endBox)")
         NSLog("here we go ...")
-        self.renderView()
+        let locationTuple = getLocationOnGraph(startBox!, brPixel: endBox!)
+        let tl:ComplexNumber = locationTuple.topLeft
+        let br:ComplexNumber = locationTuple.bottomRight
+        renderer = MandelbrotRenderer(size: imageView.frame.size, topLeft: tl, bottomRight: br)
+        let cgim: CGImage = renderer!.getImage()
+        let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
+        imageView.image = nsImage
     }
 
     override func mouseMoved(theEvent: NSEvent) {
@@ -48,11 +55,9 @@ class MandelView: NSView {
         return true
     }
     
-    func renderView() {
+    func renderView(topLeft:ComplexNumber, bottomRight:ComplexNumber) {
         let frameSize: CGSize = imageView.frame.size
-        let tl2: ComplexNumber = ComplexNumber(x: -1.75, y: 1.2)
-        let br2: ComplexNumber = ComplexNumber(x: 0.3, y: -1.0)
-        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: tl2, bottomRight: br2)
+        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: topLeft, bottomRight: bottomRight)
         let cgim: CGImage = renderer.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
         imageView.image = nsImage
@@ -66,5 +71,11 @@ class MandelView: NSView {
         let cgim: CGImage = renderer.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
         imageView.image = nsImage
+    }
+    
+    func getLocationOnGraph(tlPixel: NSPoint, brPixel: NSPoint) -> (topLeft: ComplexNumber, bottomRight: ComplexNumber) {
+        let topLeft = ComplexNumber(x: -1.0, y: 1.0)
+        let bottomRight = ComplexNumber(x: 0.35, y:-1.0)
+        return (topLeft, bottomRight)
     }
 }
