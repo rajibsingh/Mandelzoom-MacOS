@@ -59,8 +59,7 @@ class MandelView: NSView {
     
     func renderView(topLeft:ComplexNumber, bottomRight:ComplexNumber) {
         let frameSize: CGSize = imageView.frame.size
-        let renderer: MandelbrotRenderer = MandelbrotRenderer(size: frameSize, topLeft: topLeft, bottomRight: bottomRight)
-        let cgim: CGImage = renderer.getImage()
+        let cgim: CGImage = renderer!.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
         imageView.image = nsImage
     }
@@ -71,8 +70,6 @@ class MandelView: NSView {
         let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
         let br: ComplexNumber = ComplexNumber(x: 0.5, y: -1.25)
         renderer = MandelbrotRenderer(size: frameSize, topLeft: tl, bottomRight: br)
-        let cgim: CGImage = renderer!.getImage()
-        let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
-        imageView.image = nsImage
+        renderView(tl, bottomRight: br)
     }
 }
