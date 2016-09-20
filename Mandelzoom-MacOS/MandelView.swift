@@ -16,6 +16,11 @@ class MandelView: NSView {
     required init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    override func keyDown(event: NSEvent) {
+        NSLog("key down registered")
+        NSLog("characters: /(event.characters) keycode: /(event.keyCode)")
+    }
 
     override func mouseDown(event: NSEvent) {
         NSLog("mouseDown event registered")
@@ -38,7 +43,7 @@ class MandelView: NSView {
         NSLog("\tstartBox:\(startBox)")
         NSLog("\tendBox:\(endBox)")
         NSLog("here we go ...")
-        renderer!.zoom()
+        renderer!.zoomIn()
         let cgim: CGImage = renderer!.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
         imageView.image = nsImage

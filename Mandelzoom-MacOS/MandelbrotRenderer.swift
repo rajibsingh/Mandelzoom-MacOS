@@ -133,11 +133,9 @@ class MandelbrotRenderer {
         return count
     }
     
-    //try out a naive zoom function. just blocking out the pieces for now
-    func zoom() {
+    func zoom(zoomPct:Double) {
         let ht = bottomRight.y - topLeft.y
         let wdth = bottomRight.x - topLeft.x
-        let zoomPct = 0.10
         
         let newTopLeftX = topLeft.x - wdth * zoomPct
         let newTopLeftY = topLeft.y - ht * zoomPct
@@ -148,6 +146,14 @@ class MandelbrotRenderer {
         let newBottomRightY = bottomRight.y
         let newBottomRight = ComplexNumber(x: newBottomRightX, y: newBottomRightY)
         bottomRight = newBottomRight
+    }
+    
+    func zoomIn() {
+        zoom(0.10)
+    }
+    
+    func zoomOut() {
+        zoom(-0.10)
     }
 
     // just does analysis for now. is not altering the generated bitmap.
@@ -162,9 +168,9 @@ class MandelbrotRenderer {
         }
         print("sorting keys")
         let keys = counts.keys.sort()
-        for key in keys {
-                print("key: \(key) value: \(counts[key]!)")
-        }
+//        for key in keys {
+//                print("key: \(key) value: \(counts[key]!)")
+//        }
         return counts.count
     }
     
