@@ -7,11 +7,12 @@ import Cocoa
 import Foundation
 
 class MandelbrotRenderer {
+    
     let size: CGSize
     private let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
     private let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
-    internal let topLeft: ComplexNumber
-    internal let bottomRight: ComplexNumber
+    internal var topLeft: ComplexNumber
+    internal var bottomRight: ComplexNumber
     private let THRESHOLD = 10
     private let MAXITERATIONS = 100
     private let offset: ComplexNumber
@@ -130,6 +131,23 @@ class MandelbrotRenderer {
             z = z.squaredPlus(c)
         }
         return count
+    }
+    
+    //try out a naive zoom function. just blocking out the pieces for now
+    func zoom() {
+        let ht = bottomRight.y - topLeft.y
+        let wdth = bottomRight.x - topLeft.x
+        let zoomPct = 0.10
+        
+        let newTopLeftX = topLeft.x - wdth * zoomPct
+        let newTopLeftY = topLeft.y - ht * zoomPct
+        let newTopLeft = ComplexNumber(x: newTopLeftX, y: newTopLeftY)
+        topLeft = newTopLeft
+        
+        let newBottomRightX = bottomRight.x - wdth * zoomPct
+        let newBottomRightY = bottomRight.y
+        let newBottomRight = ComplexNumber(x: newBottomRightX, y: newBottomRightY)
+        bottomRight = newBottomRight
     }
 
     // just does analysis for now. is not altering the generated bitmap.

@@ -38,10 +38,7 @@ class MandelView: NSView {
         NSLog("\tstartBox:\(startBox)")
         NSLog("\tendBox:\(endBox)")
         NSLog("here we go ...")
-        let locationTuple = getLocationOnGraph(startBox!, brPixel: endBox!, renderer: renderer!)
-        let tl:ComplexNumber = locationTuple.topLeft
-        let br:ComplexNumber = locationTuple.bottomRight
-        renderer = MandelbrotRenderer(size: imageView.frame.size, topLeft: tl, bottomRight: br)
+        renderer!.zoom()
         let cgim: CGImage = renderer!.getImage()
         let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
         imageView.image = nsImage
@@ -63,6 +60,7 @@ class MandelView: NSView {
         imageView.image = nsImage
     }
     
+    
     func initRender() {
         let frameSize: CGSize = imageView.frame.size
         let tl: ComplexNumber = ComplexNumber(x: -2.0, y: 1.5)
@@ -72,19 +70,4 @@ class MandelView: NSView {
         let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
         imageView.image = nsImage
     }
-    
-    func getLocationOnGraph(tlPixel: NSPoint, brPixel: NSPoint, renderer: MandelbrotRenderer) -> (topLeft: ComplexNumber, bottomRight: ComplexNumber) {
-//        let topLeft = ComplexNumber(x: -1.0, y: 1.0)
-//        let bottomRight = ComplexNumber(x: 0.35, y:-1.0)
-//        return (topLeft, bottomRight)
-        
-        self.size = size
-        self.topLeft = topLeft
-        self.bottomRight = bottomRight
-        let dX = (bottomRight.x - topLeft.x) / Double(size.width)
-        let dY = (bottomRight.y - topLeft.y) / Double(size.height)
-        offset = ComplexNumber(x: dX, y: dY)
-    }
-    
-
 }
