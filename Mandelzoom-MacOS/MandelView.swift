@@ -12,14 +12,17 @@ class MandelView: NSView {
     private var endBox: NSPoint?
     @IBOutlet weak var imageView: NSImageView!
     private var renderer: MandelbrotRenderer?
-
+    override var acceptsFirstResponder: Bool { return true }
+    
     required init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
+    
+    
     override func keyDown(event: NSEvent) {
         NSLog("key down registered")
-        NSLog("characters: /(event.characters) keycode: /(event.keyCode)")
+        NSLog("characters: \(event.characters) keycode: \(event.keyCode)")
     }
 
     override func mouseDown(event: NSEvent) {
