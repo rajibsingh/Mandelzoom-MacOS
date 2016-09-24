@@ -18,11 +18,14 @@ class MandelView: NSView {
         super.init(coder: aDecoder)
     }
     
-    
-    
     override func keyDown(event: NSEvent) {
         NSLog("key down registered")
         NSLog("characters: \(event.characters) keycode: \(event.keyCode)")
+        renderer!.zoomOut()
+        let cgim: CGImage = renderer!.getImage()
+        let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
+        imageView.image = nsImage
+        
     }
 
     override func mouseDown(event: NSEvent) {
