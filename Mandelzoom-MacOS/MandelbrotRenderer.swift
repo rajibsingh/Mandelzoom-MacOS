@@ -9,13 +9,13 @@ import Foundation
 class MandelbrotRenderer {
     
     let size: CGSize
-    private let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
-    private let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
+    fileprivate let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
+    fileprivate let bitmapInfo: CGBitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedFirst.rawValue)
     internal var topLeft: ComplexNumber
     internal var bottomRight: ComplexNumber
-    private let THRESHOLD = 10
-    private let MAXITERATIONS = 100
-    private let offset: ComplexNumber
+    fileprivate let THRESHOLD = 10
+    fileprivate let MAXITERATIONS = 100
+    fileprivate let offset: ComplexNumber
 
     struct PixelData {
         var a: UInt8 = 255
@@ -102,28 +102,28 @@ class MandelbrotRenderer {
         }
 
         var data = pixels // Copy to mutable []
-        let providerRef = CGDataProviderCreateWithCFData(
-        NSData(bytes: &data, length: data.count * sizeof(PixelData))
+        let providerRef = CGDataProvider(
+        data: Data(bytes: UnsafePointer<UInt8>(&data), count: data.count * sizeof(PixelData))
         )
-        let cgim = CGImageCreate(
-        Int(size.width),
-                Int(size.height),
-                Int(bitsPerComponent),
-                Int(bitsPerPixel),
-                Int(size.width) * sizeof(PixelData),
-                rgbColorSpace,
-                bitmapInfo,
-                providerRef,
-                nil,
-                true,
-                CGColorRenderingIntent.RenderingIntentDefault
+        let cgim = CGImage(
+        width: Int(size.width),
+                height: Int(size.height),
+                bitsPerComponent: Int(bitsPerComponent),
+                bitsPerPixel: Int(bitsPerPixel),
+                bytesPerRow: Int(size.width) * sizeof(PixelData),
+                space: rgbColorSpace,
+                bitmapInfo: bitmapInfo,
+                provider: providerRef,
+                decode: nil,
+                shouldInterpolate: true,
+                intent: CGColorRenderingIntent.defaultIntent
         )
         print("pixels size is \(pixels.count)");
         print("countArray size is \(countArray.count)")
         return cgim!
     }
 
-    func getCount(c: ComplexNumber) -> Int{
+    func getCount(_ c: ComplexNumber) -> Int{
         var count = 0
         var z = ComplexNumber(x: 0, y: 0)
         while (count < MAXITERATIONS && z.size() < 2) {
@@ -133,7 +133,7 @@ class MandelbrotRenderer {
         return count
     }
     
-    func zoom(zoomPct:Double) {
+    func zoom(_ zoomPct:Double) {
         let ht = bottomRight.y - topLeft.y
         let wdth = bottomRight.x - topLeft.x
         
@@ -157,7 +157,7 @@ class MandelbrotRenderer {
     }
 
     // just does analysis for now. is not altering the generated bitmap.
-    func analyzeForColors(input : [Int]) -> Int  {
+    func analyzeForColors(_ input : [Int]) -> Int  {
         var counts = [Int : Int]()
         for count in input {
             if counts[count] != nil {
@@ -167,7 +167,7 @@ class MandelbrotRenderer {
             }
         }
         print("sorting keys")
-        let keys = counts.keys.sort()
+        let keys = counts.keys.sorted()
 //        for key in keys {
 //                print("key: \(key) value: \(counts[key]!)")
 //        }
@@ -193,7 +193,7 @@ class ComplexNumber: CustomStringConvertible {
         return sqrt(x * x + y * y)
     }
 
-    func squaredPlus(c: ComplexNumber) -> ComplexNumber {
+    func squaredPlus(_ c: ComplexNumber) -> ComplexNumber {
         return self.square().add(c)
     }
 
@@ -203,11 +203,11 @@ class ComplexNumber: CustomStringConvertible {
         return ComplexNumber(x: newX, y: newY)
     }
 
-    func add(that: ComplexNumber) -> ComplexNumber {
+    func add(_ that: ComplexNumber) -> ComplexNumber {
         return ComplexNumber(x: self.x + that.x, y: self.y + that.y)
     }
 
-    func isNear(that: ComplexNumber, distance: Int) -> Bool {
+    func isNear(_ that: ComplexNumber, distance: Int) -> Bool {
         let dX = that.x - self.x
         let dY = that.y - self.y
         if sqrt(dX * dX + dY * dY) <  Double(distance) {
@@ -217,7 +217,7 @@ class ComplexNumber: CustomStringConvertible {
         }
     }
 
-    func inBox(that: ComplexNumber, distance: Int) -> Bool {
+    func inBox(_ that: ComplexNumber, distance: Int) -> Bool {
         let dX = that.x - self.x
         let dY = that.y - self.y
         if abs(dX) < Double(distance) && abs(dY) < Double(distance) {

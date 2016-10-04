@@ -149,9 +149,11 @@
 				TargetAttributes = {
 					35F582401D1114DC0005FAC9 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					35F582511D1114DC0005FAC9 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 35F582401D1114DC0005FAC9;
 					};
 				};
@@ -327,6 +329,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sepoysoftware.Mandelzoom-MacOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -339,6 +342,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sepoysoftware.Mandelzoom-MacOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -351,6 +355,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sepoysoftware.Mandelzoom-MacOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mandelzoom-MacOS.app/Contents/MacOS/Mandelzoom-MacOS";
 			};
 			name = Debug;
@@ -364,6 +369,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sepoysoftware.Mandelzoom-MacOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mandelzoom-MacOS.app/Contents/MacOS/Mandelzoom-MacOS";
 			};
 			name = Release;
@@ -387,6 +393,7 @@
 				35F5825D1D1114DC0005FAC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		35F5825E1D1114DC0005FAC9 /* Build configuration list for PBXNativeTarget "Mandelzoom-MacOSTests" */ = {
 			isa = XCConfigurationList;
@@ -395,6 +402,7 @@
 				35F582601D1114DC0005FAC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

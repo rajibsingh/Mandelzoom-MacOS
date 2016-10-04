@@ -8,30 +8,30 @@ import Cocoa
 
 class MandelView: NSView {
 
-    private var startBox: NSPoint?
-    private var endBox: NSPoint?
+    fileprivate var startBox: NSPoint?
+    fileprivate var endBox: NSPoint?
     @IBOutlet weak var imageView: NSImageView!
-    private var renderer: MandelbrotRenderer?
+    fileprivate var renderer: MandelbrotRenderer?
     override var acceptsFirstResponder: Bool { return true }
     
     required init!(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func keyDown(event: NSEvent) {
+    override func keyDown(with event: NSEvent) {
         NSLog("key down registered")
         NSLog("characters: \(event.characters) keycode: \(event.keyCode)")
         renderer!.zoomOut()
         let cgim: CGImage = renderer!.getImage()
-        let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
+        let nsImage: NSImage = NSImage(cgImage: cgim, size: imageView.frame.size)
         imageView.image = nsImage
         
     }
 
-    override func mouseDown(event: NSEvent) {
+    override func mouseDown(with event: NSEvent) {
         NSLog("mouseDown event registered")
         let location = event.locationInWindow
-        let local_point = convertPoint(location, fromView: self)
+        let local_point = convert(location, from: self)
         startBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
     }
@@ -40,10 +40,10 @@ class MandelView: NSView {
 //        NSLog("mouseDragged event registered")
 //    }
 
-    override func mouseUp(event: NSEvent) {
+    override func mouseUp(with event: NSEvent) {
         NSLog("mouseUp event registered")
         let location = event.locationInWindow
-        let local_point = convertPoint(location, fromView: self)
+        let local_point = convert(location, from: self)
         endBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
         NSLog("\tstartBox:\(startBox)")
@@ -51,22 +51,22 @@ class MandelView: NSView {
         NSLog("here we go ...")
         renderer!.zoomIn()
         let cgim: CGImage = renderer!.getImage()
-        let nsImage: NSImage = NSImage(CGImage: cgim, size: imageView.frame.size)
+        let nsImage: NSImage = NSImage(cgImage: cgim, size: imageView.frame.size)
         imageView.image = nsImage
     }
 
-    override func mouseMoved(theEvent: NSEvent) {
+    override func mouseMoved(with theEvent: NSEvent) {
         NSLog("mouseDown event registered")
     }
 
-    func acceptsFirstMouseEvent(theEvent: NSEvent) -> Bool {
+    func acceptsFirstMouseEvent(_ theEvent: NSEvent) -> Bool {
         return true
     }
     
-    func renderView(topLeft:ComplexNumber, bottomRight:ComplexNumber) {
+    func renderView(_ topLeft:ComplexNumber, bottomRight:ComplexNumber) {
         let frameSize: CGSize = imageView.frame.size
         let cgim: CGImage = renderer!.getImage()
-        let nsImage: NSImage = NSImage(CGImage: cgim, size: frameSize)
+        let nsImage: NSImage = NSImage(cgImage: cgim, size: frameSize)
         imageView.image = nsImage
     }
     
