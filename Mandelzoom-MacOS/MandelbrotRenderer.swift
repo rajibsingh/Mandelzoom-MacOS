@@ -101,23 +101,9 @@ class MandelbrotRenderer {
             pixels.append(pixel)
         }
 
-        var data = pixels // Copy to mutable []
-        let providerRef = CGDataProvider(
-        data: Data(bytes: UnsafePointer<UInt8>(&data), count: data.count * sizeof(PixelData))
-        )
-        let cgim = CGImage(
-        width: Int(size.width),
-                height: Int(size.height),
-                bitsPerComponent: Int(bitsPerComponent),
-                bitsPerPixel: Int(bitsPerPixel),
-                bytesPerRow: Int(size.width) * sizeof(PixelData),
-                space: rgbColorSpace,
-                bitmapInfo: bitmapInfo,
-                provider: providerRef,
-                decode: nil,
-                shouldInterpolate: true,
-                intent: CGColorRenderingIntent.defaultIntent
-        )
+        let raw = Data(bytes: pixels, count: pixels.count * MemoryLayout<PixelData>.size)
+        let providerRef = CGDataProvider(data: raw as CFData)
+        let cgim = CGImage(width: Int(size.width), height: Int(size.height), bitsPerComponent: Int(bitsPerComponent), bitsPerPixel: Int(bitsPerPixel), bytesPerRow: Int(size.width) * MemoryLayout<PixelData>.size, space: rgbColorSpace, bitmapInfo: bitmapInfo, provider: providerRef!, decode: nil, shouldInterpolate: true, intent: CGColorRenderingIntent.defaultIntent)
         print("pixels size is \(pixels.count)");
         print("countArray size is \(countArray.count)")
         return cgim!
@@ -167,7 +153,7 @@ class MandelbrotRenderer {
             }
         }
         print("sorting keys")
-        let keys = counts.keys.sorted()
+//        let keys = counts.keys.sorted()
 //        for key in keys {
 //                print("key: \(key) value: \(counts[key]!)")
 //        }

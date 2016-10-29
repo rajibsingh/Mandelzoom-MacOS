@@ -17,12 +17,5 @@ class ViewController: NSViewController {
         mandelView.initRender()
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
 }
 
