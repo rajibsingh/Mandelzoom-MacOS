@@ -20,7 +20,7 @@ class MandelView: NSView {
     
     override func keyDown(with event: NSEvent) {
         NSLog("key down registered")
-        NSLog("characters: \(event.characters) keycode: \(event.keyCode)")
+        NSLog("characters: \(String(describing: event.characters)) keycode: \(event.keyCode)")
         renderer!.zoomOut()
         let cgim: CGImage = renderer!.getImage()
         let nsImage: NSImage = NSImage(cgImage: cgim, size: imageView.frame.size)
@@ -47,7 +47,7 @@ class MandelView: NSView {
         endBox = local_point
         NSLog("\tlocation:\(local_point.x), \(local_point.y)")
         NSLog("\tstartBox:\(startBox)")
-        NSLog("\tendBox:\(endBox)")
+        NSLog("\tendBox:\(String(describing: endBox))")
         NSLog("here we go ...")
         renderer!.zoomIn()
         let cgim: CGImage = renderer!.getImage()
